@@ -198,7 +198,7 @@ FSenderStruct* RegisterReceiver(FName spoutName){
 	newFSenderStruc->TextureColor = nullptr;
 	newFSenderStruc->sharedResource = nullptr;
 	newFSenderStruc->rView = nullptr;
-	newFSenderStruc->texTemp = NULL;
+	//newFSenderStruc->texTemp = NULL;
 
 	//TextureColor = new
 	UE_LOG(LogTemp, Warning, TEXT("No material instance, creating...//////"));
@@ -216,14 +216,14 @@ FSenderStruct* RegisterReceiver(FName spoutName){
 	}
 	UE_LOG(LogTemp, Warning, TEXT("--starting...--___Create Shader Resource View___---"));
 	 g_D3D12Device->CreateShaderResourceView(newFSenderStruc->sharedResource,newFSenderStruc->rView, *cpuDescriptorHandle);
-	if (FAILED(createShaderResourceViewResult)) {
+	if (FAILED(cpuDescriptorHandle)) {
 		UE_LOG(LogTemp, Error, TEXT("--FAIL--___Create Shader Resource View___---"));
 		return false;
 
 	}
 
 	//texture shared for the spout resource handle
-	D3D12_RESOURCE_DESC* tex = (ID3D12Texture2D*)newFSenderStruc->sharedResource;
+	ID3D12Resource* tex = (ID3D12Resource*)newFSenderStruc->sharedResource;
 
 	if (tex == nullptr) {
 		UE_LOG(LogTemp, Error, TEXT("---|||------||||----"));
@@ -295,7 +295,7 @@ bool USpoutBPFunctionLibrary::SpoutInfoFrom(FName spoutName, FSenderStruct& Send
 }
 
 
-bool USpoutBPFunctionLibrary::CreateRegisterSender(FName spoutName, ID3D12Texture2D* baseTexture)
+bool USpoutBPFunctionLibrary::CreateRegisterSender(FName spoutName, ID3D12Resource *baseTexture)
 {
 
 	if (g_D3D12Device == nullptr || g_pImmediateContext == NULL){
