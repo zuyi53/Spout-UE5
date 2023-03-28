@@ -5,18 +5,9 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "SpoutUE5",
+			"Name": "spoutTest4",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "ModelingToolsEditorMode",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Editor"
-			]
 		}
 	]
 }
